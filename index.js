@@ -41,7 +41,16 @@ app.get("/api/:date", (req, res)=>{
 
 })
 
+app.get('/api', (req, res) =>{
+  let currentDate = new Date()
+  let unix = parseInt((currentDate.getTime()).toFixed(0))
 
+  let result = {
+    unix,
+    utc: currentDate.toString().split('+')[0]
+  }
+  res.json(result)
+})
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {
