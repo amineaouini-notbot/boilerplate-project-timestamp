@@ -26,11 +26,17 @@ app.get("/api/hello", function (req, res) {
 
 app.get("/api/:date", (req, res)=>{
   let {date} = req.params;
-  let result = {}
   let inputUnix = Number(date)
   let utcDate = new Date(inputUnix ? inputUnix : date);
-  console.log(!isNaN(utcDate))
-  if (isNaN(utcDate)) res.json({error: "Invalid Date"})
+  // if date is invalid send error
+  if (isNaN(utcDate)) res.json({error: "Invalid Date"}) 
+
+  // setup result to be sent
+  utcDate.setHours(0,0,0,0) 
+  let unix = inputUnix ? inputUnix : parseInt((utcDate.getTime()).toFixed(0)) 
+  let result = { unix, utc: utcDate.toString().split('+')[0]}
+
+  res.json(result) // send result
 
 
 })
