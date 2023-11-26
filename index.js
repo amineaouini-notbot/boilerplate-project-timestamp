@@ -44,7 +44,7 @@ app.get("/api/:date", (req, res)=>{
 app.get('/api', (req, res) =>{
   let currentDate = new Date()
   let unix = parseInt((currentDate.getTime()).toFixed(0))
-
+  currentDate.setHours(0,0,0,0) 
   let result = {
     unix,
     utc: currentDate.toString().split('+')[0]
