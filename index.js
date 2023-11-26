@@ -34,7 +34,7 @@ app.get("/api/:date", (req, res)=>{
   // setup result to be sent
   utcDate.setHours(0,0,0) 
   let unix = inputUnix ? inputUnix : parseInt((utcDate.getTime()).toFixed(0)) 
-  let result = { unix, utc: utcDate.toString().split('+')[0]}
+  let result = { unix, utc: utcDate.toUTCString()}
 
   res.json(result) // send result
 
